@@ -1,0 +1,153 @@
+@startuml
+class Entrada {
++ {static} EMenu leerOpcionMenu(String)
++ {static} boolean leerConfirmacion(String)
++ {static} String leerString(String)
++ {static} double leerDoublePositivo(String)
+}
+class Grupo {
+- String nombre
++ <<Create>> Grupo(String)
++ void copy(Grupo)
++ String toString()
++ int compareTo(Grupo)
++ boolean equals(Object)
++ int hashCode()
+}
+class Cargador {
++ {static} void carga(Gestor,String)
+}
+enum EMenu {
++  SALIR
++  EXISTE_GRUPO
++  ANADIR_GRUPO
++  LISTAR_GRUPOS
++  BORRAR_GRUPO
++  EXISTE_ASIGNATURA_GRUPO
++  ANADIR_ASIGNATURA_GRUPO
++  LISTAR_ASIGNATURAS_GRUPO
++  BORRAR_ASIGNATURA_GRUPO
++  LISTAR_ASIGNATURAS_TODAS
++  LISTAR_ESTUDIANTES_ASIGNATURA_GRUPO
++  EXISTE_ESTUDIANTE_ASIGNATURA_GRUPO
++  CONSULTAR_ESTUDIANTE_ASIGNATURA_GRUPO
++  ANADIR_ESTUDIANTE_ASIGNATURA_GRUPO
++  BORRAR_ESTUDIANTE_ASIGNATURA_GRUPO
++  LISTAR_ESTUDIANTES_GRUPO
++  LISTAR_ESTUDIANTES_ASIGNATURA
++  LISTAR_ESTUDIANTES_NOTA
++  DISTRIBUCION_NOTAS_ASIGNATURA_GRUPO
++  DISTRIBUCION_NOTAS_ASIGNATURA
++  GRUPO_ALUMNO
++  NOTAS_ALUMNO
+- int numero
+~ <<Create>> EMenu(int)
++ int getNumero()
++ {static} EMenu fromNumero(int)
+}
+class Asignatura {
+- String nombre
++ <<Create>> Asignatura(String)
++ String toString()
++ int compareTo(Asignatura)
++ boolean equals(Object)
++ int hashCode()
+}
+class Gestor {
+- TreeMap<Grupo,HashMap<Asignatura,ArrayList<Estudiante>>> registro
++ <<Create>> Gestor()
++ void setRegistro(TreeMap<Grupo,HashMap<Asignatura,ArrayList<Estudiante>>>)
++ TreeMap<Grupo,HashMap<Asignatura,ArrayList<Estudiante>>> getRegistro()
++ boolean existeGrupo(Grupo)
++ void anadirGrupo(Grupo)
++ TreeSet<Grupo> getGrupos()
++ void borrarGrupo(Grupo)
++ boolean existeAsignaturaGrupo(Asignatura,Grupo)
++ void anadirAsignaturaGrupo(Asignatura,Grupo)
++ HashSet<Asignatura> getAsignaturas(Grupo)
++ HashSet<Asignatura> getAsignaturas()
++ void borrarAsignaturaGrupo(Asignatura,Grupo)
++ ArrayList<Estudiante> getListaEstudiantesAsignaturaGrupo(Asignatura,Grupo)
++ boolean existeEstudianteAsignaturaGrupo(Estudiante,Asignatura,Grupo)
++ Estudiante getEstudianteAsignaturaGrupo(Estudiante,Asignatura,Grupo)
++ void anadirEstudianteAsignaturaGrupo(Estudiante,Asignatura,Grupo)
++ void borrarEstudianteAsignaturaGrupo(Estudiante,Asignatura,Grupo)
++ ArrayList<Estudiante> getEstudiantes(Grupo)
++ ArrayList<Estudiante> getEstudiantes(Asignatura)
++ TreeMap<Estudiante,Grupo> getEstudiantesConNotaMayorIgualQue(Asignatura,double)
++ TreeMap<Integer,Integer> getDistribucionNotasAsignaturaGrupo(Asignatura,Grupo)
++ TreeMap<Integer,Integer> getDistribucionNotasAsignatura(Asignatura)
+- TreeMap<Integer,Integer> acumulaDistribucionesDeNotas(TreeMap<Integer,Integer>,TreeMap<Integer,Integer>)
++ Grupo grupoDelEstudiante(String,String)
++ HashMap<Asignatura,Double> notasEstudiante(String,String)
+}
+class Estudiante {
+- String nombre
+- String apellidos
+- double nota
++ <<Create>> Estudiante(String,String)
++ <<Create>> Estudiante(String,String,double)
++ String getNombre()
++ void setNombre(String)
++ String getApellidos()
++ void setApellidos(String)
++ double getNota()
++ void setNota(double)
++ String toString()
++ int compareTo(Estudiante)
++ boolean equals(Object)
++ int hashCode()
+}
+class Salida {
++ {static} void mostrarMenu()
++ {static} void info(String)
++ {static} void listar(String[])
++ {static} void listarH(String[],String[])
++ {static} void listarVnota(String[],String[])
++ {static} void listarVgrupo(String[],String[])
+}
+class Menu {
+- Gestor gestor
++ <<Create>> Menu(Gestor)
++ {static} void main(String[])
++ void run()
+- void existeGrupo()
+- void anadirGrupo()
+- void listarGrupos()
+- void borrarGrupo()
+- void existeAsignatura()
+- void anadirAsignatura()
+- void listarAsignaturasGrupo()
+- void borrarAsignatura()
+- void listarAsignaturasTodas()
+- void listarEstudiantesAsignaturaGrupo()
+- void existeEstudianteAsignaturaGrupo()
+- void consultarEstudianteAsignaturaGrupo()
+- void anadirEstudianteAsignaturaGrupo()
+- void borrarEstudianteAsignaturaGrupo()
+- void listarEstudiantesGrupo()
+- void listarEstudiantesAsignatura()
+- void listarEstudiantesNota()
+- void distribucionNotasAsignaturaGrupo()
+- void distribucionNotasAsignatura()
+- void grupoAlumno()
+- void notasAlumno()
+}
+
+Menu --> Gestor
+Menu ..> Cargador
+Menu ..> EMenu
+Menu ..> Salida
+Menu ..> Entrada
+Menu ..> Grupo
+Menu ..> Asignatura
+Menu ..> Estudiante
+Entrada ..> EMenu
+Cargador ..> Gestor
+Gestor ..> Grupo
+Gestor ..> Asignatura
+Gestor ..> Estudiante
+Comparable <|.. Grupo
+Comparable <|.. Asignatura
+Comparable <|.. Estudiante
+@enduml
