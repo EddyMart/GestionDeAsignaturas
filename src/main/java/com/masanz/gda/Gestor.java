@@ -31,7 +31,8 @@ public class Gestor {
      */
     public boolean existeGrupo(Grupo grupo) {
         // TODO: existeGrupo (11)
-        return false;
+        if (grupo==null) return false;
+        return registro.containsKey(grupo);
     }
 
     /**
@@ -41,6 +42,8 @@ public class Gestor {
      */
     public void anadirGrupo(Grupo grupo) {
         // TODO: anadirGrupo (12)
+        if (grupo==null) return;
+        registro.put(grupo,new HashMap<>());
     }
 
     /**
@@ -50,7 +53,14 @@ public class Gestor {
      */
     public TreeSet<Grupo> getGrupos() {
         // TODO: getGrupos (13)
-        return null;
+        TreeSet<Grupo> grupos = new TreeSet<>();
+//        for (Map.Entry<Grupo, HashMap<Asignatura, ArrayList<Estudiante>>> entry : registro.entrySet()) {
+//            System.out.println(grupos.add(entry.getKey()));
+//        }
+        for (Grupo grupo : registro.keySet()) {
+            System.out.println(grupos.add(grupo));
+        }
+        return grupos;
     }
 
     /**
@@ -59,6 +69,13 @@ public class Gestor {
      */
     public void borrarGrupo(Grupo grupo) {
         // TODO: borrarGrupo (14)
+//        Iterator<Grupo> it = registro.keySet().iterator();
+//        while (it.hasNext()) {
+//            if (it.next().equals(grupo)) {
+//                it.remove();
+//            }
+//        }
+        registro.remove(grupo);
     }
 
     //endregion
@@ -71,11 +88,16 @@ public class Gestor {
      * @param grupo
      * @return Si existe la asignatura asociada al grupo indicado en el registro.
      */
+//    private TreeMap<Grupo, HashMap<Asignatura, ArrayList<Estudiante>>> registro;
     public boolean existeAsignaturaGrupo(Asignatura asignatura, Grupo grupo) {
         // TODO: existeAsignaturaGrupo (21)
+        for (Map.Entry<Grupo, HashMap<Asignatura, ArrayList<Estudiante>>> entry : registro.entrySet()) {
+            if (entry.getValue().containsKey(asignatura) && entry.getKey().equals(grupo)) {
+                return true;
+            }
+        }
         return false;
     }
-
     /**
      * Si el grupo no existe en el registro se deberá añadir dentro de este método.
      * Incorpora una lista de estudiantes nueva asociada a una asignatura al grupo indicado.
@@ -84,6 +106,7 @@ public class Gestor {
      */
     public void anadirAsignaturaGrupo(Asignatura asignatura, Grupo grupo) {
         // TODO: anadirAsignaturaGrupo (22)
+
     }
 
     /**
