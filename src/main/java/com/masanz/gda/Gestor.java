@@ -30,7 +30,6 @@ public class Gestor {
      * @return Devuelve null si el grupo es nulo o true o false dependiendo si la clave grupo existe en el registro.
      */
     public boolean existeGrupo(Grupo grupo) {
-        // TODO: existeGrupo (11)
         if (grupo==null) return false;
         return registro.containsKey(grupo);
     }
@@ -41,7 +40,6 @@ public class Gestor {
      * @param grupo Instancia de un grupo
      */
     public void anadirGrupo(Grupo grupo) {
-        // TODO: anadirGrupo (12)
         if (grupo==null) return;
         registro.put(grupo,new HashMap<>());
     }
@@ -52,7 +50,6 @@ public class Gestor {
      * @return TreeSet de grupos del registro
      */
     public TreeSet<Grupo> getGrupos() {
-        // TODO: getGrupos (13)
         TreeSet<Grupo> grupos = new TreeSet<>();
 //        for (Map.Entry<Grupo, HashMap<Asignatura, ArrayList<Estudiante>>> entry : registro.entrySet()) {
 //            System.out.println(grupos.add(entry.getKey()));
@@ -68,7 +65,6 @@ public class Gestor {
      * @param grupo Instancia de Grupo.
      */
     public void borrarGrupo(Grupo grupo) {
-        // TODO: borrarGrupo (14)
 //        Iterator<Grupo> it = registro.keySet().iterator();
 //        while (it.hasNext()) {
 //            if (it.next().equals(grupo)) {
@@ -90,7 +86,6 @@ public class Gestor {
      */
 
     public boolean existeAsignaturaGrupo(Asignatura asignatura, Grupo grupo) {
-        // TODO: existeAsignaturaGrupo (21)
         for (Map.Entry<Grupo, HashMap<Asignatura, ArrayList<Estudiante>>> entry : registro.entrySet()) {
             if (entry.getValue().containsKey(asignatura) && entry.getKey().equals(grupo)) {
                 return true;
@@ -106,7 +101,6 @@ public class Gestor {
      * @param grupo
      */
     public void anadirAsignaturaGrupo(Asignatura asignatura, Grupo grupo) {
-        // TODO: anadirAsignaturaGrupo (22)
         if (!existeGrupo(grupo)) {
             anadirGrupo(grupo);
         }
@@ -123,7 +117,6 @@ public class Gestor {
      */
     //    private TreeMap<Grupo, HashMap<Asignatura, ArrayList<Estudiante>>> registro;
     public HashSet<Asignatura> getAsignaturas(Grupo grupo) {
-        // TODO: getAsignaturas grupo (23)
         HashSet<Asignatura> hasAsignaturas = new HashSet<>();
         if (registro.containsKey(grupo)) {
             HashMap<Asignatura, ArrayList<Estudiante>> asig = registro.get(grupo);
@@ -143,7 +136,6 @@ public class Gestor {
      */
     //    private TreeMap<Grupo, HashMap<Asignatura, ArrayList<Estudiante>>> registro;
     public HashSet<Asignatura> getAsignaturas() {
-        // TODO: getAsignaturas todas (24)
         HashSet<Asignatura> asignaturas = new HashSet<>();
         //aqui se itera por todos los grupos
         for (HashMap<Asignatura, ArrayList<Estudiante>> value : registro.values()) {
@@ -162,7 +154,6 @@ public class Gestor {
      */
     public void borrarAsignaturaGrupo(Asignatura asignatura, Grupo grupo) {
         //    private TreeMap<Grupo, HashMap<Asignatura, ArrayList<Estudiante>>> registro;
-        // TODO: borrarAsignaturaGrupo (25)
         if (existeAsignaturaGrupo(asignatura, grupo)) {
             registro.get(grupo).remove(asignatura);
         }
@@ -180,7 +171,6 @@ public class Gestor {
      */
 //    TreeMap<Grupo, HashMap<Asignatura, ArrayList<Estudiante>>> registro;
     public ArrayList<Estudiante> getListaEstudiantesAsignaturaGrupo(Asignatura asignatura, Grupo grupo) {
-        // TODO: getListaEstudiantesAsignaturaGrupo (31)
         // lo inicie como null.....me costo mucho pillar este petodo
         ArrayList<Estudiante> listaEstudiantes = null;
        if (existeAsignaturaGrupo(asignatura,grupo)){
@@ -204,7 +194,6 @@ public class Gestor {
      */
     //    TreeMap<Grupo, HashMap<Asignatura, ArrayList<Estudiante>>> registro;
     public boolean existeEstudianteAsignaturaGrupo(Estudiante estudiante, Asignatura asignatura, Grupo grupo) {
-        // TODO: existeEstudianteAsignaturaGrupo (32)
         if (existeAsignaturaGrupo(asignatura,grupo)){
             HashMap<Asignatura,ArrayList<Estudiante>> listaDeAsignaturas = registro.get(grupo);
             ArrayList<Estudiante> listaDeEstudiantes = listaDeAsignaturas.get(asignatura);
@@ -223,7 +212,6 @@ public class Gestor {
      */
     //    TreeMap<Grupo, HashMap<Asignatura, ArrayList<Estudiante>>> registro;
     public Estudiante getEstudianteAsignaturaGrupo(Estudiante estudiante, Asignatura asignatura, Grupo grupo) {
-        // TODO: getEstudianteAsignaturaGrupo (33)
         if (existeEstudianteAsignaturaGrupo(estudiante, asignatura, grupo)){
             HashMap<Asignatura,ArrayList<Estudiante>> listaDeAsignaturas = registro.get(grupo);
             ArrayList<Estudiante> listaDeEstudiantes = listaDeAsignaturas.get(asignatura);
@@ -247,7 +235,6 @@ public class Gestor {
      */
     //    private TreeMap<Grupo, HashMap<Asignatura, ArrayList<Estudiante>>> registro;
     public void anadirEstudianteAsignaturaGrupo(Estudiante estudiante, Asignatura asignatura, Grupo grupo) {
-        // TODO: anadirEstudianteAsignaturaGrupo (34)
         if (!existeAsignaturaGrupo(asignatura, grupo)){
             anadirAsignaturaGrupo(asignatura, grupo);
         }
@@ -270,7 +257,6 @@ public class Gestor {
      * @param grupo
      */
     public void borrarEstudianteAsignaturaGrupo(Estudiante estudiante, Asignatura asignatura, Grupo grupo) {
-        // TODO: borrarEstudianteAsignaturaGrupo (35)
         if (existeEstudianteAsignaturaGrupo(estudiante, asignatura, grupo)){
             HashMap<Asignatura,ArrayList<Estudiante>> listaDeAsignaturas = registro.get(grupo);
             ArrayList<Estudiante> listaDeEstudiantes = listaDeAsignaturas.get(asignatura);
@@ -295,7 +281,6 @@ public class Gestor {
      */
     //    private TreeMap<Grupo, HashMap<Asignatura, ArrayList<Estudiante>>> registro;
     public ArrayList<Estudiante> getEstudiantes(Grupo grupo) {
-        // TODO: getEstudiantes grupo (41)
         // este metodo me costo mucho darme cuenta como hacer que devuelva null y no una lista vacia
         if (!existeGrupo(grupo)){
             anadirGrupo(grupo);
@@ -325,7 +310,6 @@ public class Gestor {
      * @return
      */
     public ArrayList<Estudiante> getEstudiantes(Asignatura asignatura) {
-        // TODO: getEstudiantes asignatura (42)
         ArrayList<Estudiante> estudiantes = new ArrayList<>();
         for (Grupo grupo : registro.keySet()) {
             ArrayList<Estudiante> listaDeEstudiantes = getListaEstudiantesAsignaturaGrupo(asignatura,grupo);
@@ -352,7 +336,6 @@ public class Gestor {
      */
     //    private TreeMap<Grupo, HashMap<Asignatura, ArrayList<Estudiante>>> registro;
     public TreeMap<Estudiante,Grupo> getEstudiantesConNotaMayorIgualQue(Asignatura asignatura, double nota) {
-        // TODO: getEstudiantesConNotaMayorIgualQue (43)
         TreeMap<Estudiante,Grupo> estudiantesOrdenados = new TreeMap<>();
         for (Grupo grupo : registro.keySet()) {
             HashMap<Asignatura,ArrayList<Estudiante>> listaDeAsignaturas = registro.get(grupo);
@@ -394,9 +377,29 @@ public class Gestor {
      * @param grupo
      * @return
      */
+    //    private TreeMap<Grupo, HashMap<Asignatura, ArrayList<Estudiante>>> registro;
     public TreeMap<Integer,Integer> getDistribucionNotasAsignaturaGrupo(Asignatura asignatura, Grupo grupo) {
-        // TODO: getDistribucionNotasAsignaturaGrupo (51)
-        return null;
+        TreeMap<Integer,Integer>  distribucionGrupos = new TreeMap<>();
+        ArrayList<Estudiante> listaDeEstudiantes = getListaEstudiantesAsignaturaGrupo(asignatura,grupo);
+        // iniciar todoo a cero
+        for (int i = 0; i <= 10; i++) {
+            distribucionGrupos.put(i, 0);
+        }
+        for (Estudiante listaDeEstudiante : listaDeEstudiantes) {
+            int nota = (int) Math.floor(listaDeEstudiante.getNota());
+            distribucionGrupos.put(nota, distribucionGrupos.get(nota) + 1);
+        }
+        //Con este no muestra las claves dont no hay 0
+//        for (Estudiante listaEstudiante : listaDeEstudiantes) {
+//            int nota = (int) Math.floor(listaEstudiante.getNota());
+//            if (!distribucionGrupos.containsKey(nota)){
+//                distribucionGrupos.put(nota,1);
+//            }else {
+//                int cantidadDenotasClave = distribucionGrupos.get(nota);
+//                distribucionGrupos.put(nota,cantidadDenotasClave+1);
+//            }
+//        }
+        return distribucionGrupos;
     }
 
     /**
@@ -414,8 +417,16 @@ public class Gestor {
      * @return
      */
     public TreeMap<Integer,Integer> getDistribucionNotasAsignatura(Asignatura asignatura) {
-        // TODO: getDistribucionNotasAsignatura (52)
-        return null;
+        TreeMap<Integer,Integer>  distribucionAsignatura = new TreeMap<>();
+        ArrayList<Estudiante> estudiantes = getEstudiantes(asignatura);
+        for (int i = 0; i <=10 ; i++) {
+            distribucionAsignatura.put(i, 0);
+        }
+        for (Estudiante estudiante : estudiantes) {
+            int nota = (int) Math.floor(estudiante.getNota());
+            distribucionAsignatura.put(nota, distribucionAsignatura.get(nota) + 1);
+        }
+        return distribucionAsignatura;
     }
 
     private TreeMap<Integer,Integer> acumulaDistribucionesDeNotas(TreeMap<Integer,Integer> map1, TreeMap<Integer,Integer> map2) {
@@ -439,8 +450,16 @@ public class Gestor {
      * @param apellidos
      * @return
      */
+//    TreeMap<Grupo, HashMap<Asignatura, ArrayList<Estudiante>>> registro;
     public Grupo grupoDelEstudiante(String nombre, String apellidos) {
-        // TODO: grupoDelEstudiante (61)
+        for (Grupo grupo : registro.keySet()) {
+            ArrayList<Estudiante> estudiantes = getEstudiantes(grupo);
+            for (Estudiante estudiante : estudiantes) {
+                if (estudiante.getNombre().equals(nombre) && estudiante.getApellidos().equals(apellidos)) {
+                    return grupo;
+                }
+            }
+        }
         return null;
     }
 
@@ -461,9 +480,25 @@ public class Gestor {
      * @param apellidos
      * @return
      */
+    //    TreeMap<Grupo, HashMap<Asignatura, ArrayList<Estudiante>>> registro;
     public HashMap<Asignatura, Double> notasEstudiante(String nombre, String apellidos) {
-        // TODO: notasEstudiante (62)
-        return null;
+       HashMap<Asignatura, Double> notasDelEstudiante = new HashMap<>();
+       Grupo grupo = grupoDelEstudiante(nombre,apellidos);
+       //esto me costo pillarlo porq me daba nullException y no caida porque, en todoo caso siento que se puede
+//        hacer este codigo con menos lineas utilando los otros metodos pero no pude implementarlos
+       if (grupo == null) {
+           return null;
+       }
+       HashMap<Asignatura, ArrayList<Estudiante>> listaDeAsignaturas = registro.get(grupo);
+        for (Asignatura asignatura : listaDeAsignaturas.keySet()) {
+            ArrayList<Estudiante> estudiantes = listaDeAsignaturas.get(asignatura);
+            for (Estudiante estudiante : estudiantes) {
+                if (estudiante.getNombre().equals(nombre) && estudiante.getApellidos().equals(apellidos)) {
+                    notasDelEstudiante.put(asignatura, estudiante.getNota());
+                }
+            }
+        }
+        return notasDelEstudiante;
     }
 
     //endregion
